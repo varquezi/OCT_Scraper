@@ -13,15 +13,14 @@ class Teacher:
         self.firstName = firstName
         self.midName = midName
         self.lastName = lastName
-        self.degrees = {}
+        self.degrees = []
 
     def addDegree(self, degree: Degree):
-        self.degrees.setdefault(degree.place, []).append({"date": degree.date,"name": degree.name})
+        self.degrees.append({"place": degree.place, "date": degree.date,"name": degree.name})
 
     def __str__(self):
         rep = "[{}] {} {} {}".format(self.id, self.firstName, self.midName, self.lastName)
-        for place in self.degrees:
-            rep += "\n\t{}".format(place)
-            for degree in self.degrees[place]:
-                rep += "\n\t\t[{:04d}/{:02d}/{:02d}] {}".format(degree["date"]["year"], degree["date"]["month"], degree["date"]["day"], degree["name"])
+        for degree in self.degrees:
+            rep += "\n\t{}".format(degree["place"])
+            rep += "\n\t\t[{:04d}/{:02d}/{:02d}] {}".format(degree["date"]["year"], degree["date"]["month"], degree["date"]["day"], degree["name"])
         return rep

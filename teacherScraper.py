@@ -31,7 +31,6 @@ def getData(octID: int, octcsid: str):
     for deg in req2:
         degree = Degree(deg["phoenix_degree_name"],(int(deg["phoenix_issueddate"][:4]), int(deg["phoenix_issueddate"][5:7]), int(deg["phoenix_issueddate"][8:])), deg["phoenix_institution_name"])
         teacher.addDegree(degree)
-    
     return teacher
 
 def getTeachers(start: int, end: int, octcsid: str):
