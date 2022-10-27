@@ -1,7 +1,5 @@
 from helpers import Degree, Teacher
 import requests
-from pathlib import Path
-import json
 import csv
 
 def getData(octID: int, octcsid: str):
