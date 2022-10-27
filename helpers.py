@@ -8,10 +8,9 @@ class Degree:
 
 
 class Teacher:
-    def __init__(self, id: int, firstName: str, midName: str, lastName: str):
+    def __init__(self, id: int, firstName: str, lastName: str):
         self.id = id
         self.firstName = firstName
-        self.midName = midName
         self.lastName = lastName
         self.degrees = []
 
@@ -19,7 +18,7 @@ class Teacher:
         self.degrees.append({"place": degree.place, "date": degree.date,"name": degree.name})
 
     def __str__(self):
-        rep = "[{}] {} {} {}".format(self.id, self.firstName, self.midName, self.lastName)
+        rep = "[{}] {} {}".format(self.id, self.firstName, self.lastName)
         for degree in self.degrees:
             rep += "\n\t{}".format(degree["place"])
             rep += "\n\t\t[{:04d}/{:02d}/{:02d}] {}".format(degree["date"]["year"], degree["date"]["month"], degree["date"]["day"], degree["name"])

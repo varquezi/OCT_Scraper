@@ -14,7 +14,7 @@ def getData(octID: int, octcsid: str):
     if (not req1JSON):
         return -2
     req1 = req1JSON['value'][0]
-    teacher = Teacher(octID, req1["phoenix_firstname"], req1["phoenix_middlename"], req1["phoenix_surname"])
+    teacher = Teacher(octID, req1["phoenix_firstname"], req1["phoenix_surname"])
     payload2 = {
         'id': octID,
         'guid': req1["contactid"],
@@ -33,22 +33,15 @@ def getData(octID: int, octcsid: str):
         teacher.addDegree(degree)
     return teacher
 
-def getTeachers(start: int, end: int, octcsid: str):
+def getTeachers(start: int, results=1, octcsid ='f41uk_O3QGF1Mo0.tf_sTdl_EUedR6pksz'):
     teacherDict = {"data":[]}
-    for i in range(start, end + 1):
-        data = getData(i, octcsid)
-        if type(data) is not int:
-            teacherDict["data"].append(data.__dict__)
-
-    if (len(teacherDict["data"]) < 1):
-        return -1
-    
     with open("oct_data.csv", "w", newline='') as f:
-        fieldnames = teacherDict["data"][0].keys()
+        fieldnames = ["id", "firstName", "lastName", "degrees"]
         writer = csv.DictWriter(f, fieldnames=fieldnames)
         writer.writeheader()
-        for teacher in teacherDict["data"]:
-            writer.writerow(teacher)
+        for i in range(start, start + results):
+            data = getData(i, octcsid)
+            if type(data) is not int:
+                writer.writerow(data.__dict__)
             
     return 0
-        
